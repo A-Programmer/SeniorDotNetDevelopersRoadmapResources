@@ -125,4 +125,15 @@ This will push a delete signal to the remote origin repository that triggers a d
 ## Git Checkout
 `git checkout` in Git means you choose that which line of the working tree is active now. Imagine we have 3 branches, main, develop, feature1 and each one has its commits and changes, now we are on develop branch, by running `git checkout main` the active branch (develop) will change to main and you can continue working on main branch.  
 
-The `git checkout` command may occasionally be confused with `git clone`. The difference between the two commands is that clone works to fetch code from a remote repository, alternatively, checkout works to switch between versions of code already on the local system.
+The `git checkout` command may occasionally be confused with `git clone`. The difference between the two commands is that clone works to fetch code from a remote repository, alternatively, checkout works to switch between versions of code already on the local system.  
+
+## Git Stash
+Sometimes, you are working on a feature that is not completed yet, and you need to change your current branch also, you don’t want to commit changes but you don’t want to lose changes, if you try to use `git checkout` command you will get an error that says: you have some unstaged changes and you should commit them or stash.  
+By using `git stash`, you can save your current changes on the working directory (not stage area or repository) and then switch your branch, recover your stashed changes, and continue your work.  
+`git stash` will save your changes in the working directory.  
+`git stash list` will show the stash list (you may have multiple stashes). 
+`git stash show -p {stash-name}` will show the details of stash.  
+`git stash drop {stash-name}` will remove stash.  
+`git stash apply {stash-name}` will revert your stashed changes(you can get the stash name by using `git stash list` command) but the stash will remain in the stash list.  
+`git stash pop {stash-name}` will revert stash changes and remove the stash from the stash list.  
+`git stash clear` will remove all stashes.  
