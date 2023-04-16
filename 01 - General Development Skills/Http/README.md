@@ -121,7 +121,7 @@ The most commonly used API based on HTTP is the XMLHttpRequest API, which can be
 Another API, server-sent events, is a one-way service that allows a server to send events to the client, using HTTP as a transport mechanism. Using the EventSource interface, the client opens a connection and establishes event handlers. The client browser automatically converts the messages that arrive on the HTTP stream into appropriate Event objects. Then it delivers them to the event handlers that have been registered for the events' type if known, or to the onmessage event handler if no type-specific event handler was established.  
 
 ## HTTP Request Methods
-**CONNECT**  
+### **CONNECT**  
 The HTTP CONNECT method starts two-way communications with the requested resource. It can be used to open a tunnel.
 
 For example, the CONNECT method can be used to access websites that use SSL (HTTPS). The client asks an HTTP Proxy server to tunnel the TCP connection to the desired destination. The server then proceeds to make the connection on behalf of the client. Once the connection has been established by the server, the Proxy server continues to proxy the TCP stream to and from the client.
@@ -137,16 +137,83 @@ CONNECT is a hop-by-hop method.
 | Cacheable                    | No  |
 | Allowed in HTML forms        | No  |  
 
-**DELETE**  
+### **DELETE**  
 
 The HTTP DELETE request method deletes the specified resource.  
 
 |                              |     |
 | ---------------------------- | :-: |
 | Request has body             | May |
-| Successful response has body | May  |
+| Successful response has body | May |
 | Safe                         | No  |
-| Idempotent                   | Yes  |
+| Idempotent                   | Yes |
 | Cacheable                    | No  |
 | Allowed in HTML forms        | No  |  
 
+**Syntax**  
+```
+DELETE /file.html HTTP/1.1
+```
+**Example**  
+Request  
+```
+DELETE /file.html HTTP/1.1
+Host: example.com
+```  
+**Responses**  
+If a DELETE method is successfully applied, there are several response status codes possible:
+
+- A 202 (Accepted) status code if the action will likely succeed but has not yet been enacted.
+- A 204 (No Content) status code if the action has been enacted and no further information is to be supplied.
+- A 200 (OK) status code if the action has been enacted and the response message includes a representation describing the status.
+
+```html
+HTTP/1.1 200 OK
+Date: Wed, 21 Oct 2015 07:28:00 GMT
+
+<html>
+  <body>
+    <h1>File deleted.</h1>
+  </body>
+</html>
+```  
+
+### **GET**
+
+The HTTP GET method requests a representation of the specified resource. Requests using GET should only be used to request data (they shouldn't include data).  
+
+> Note: Sending body/payload in a GET request may cause some existing implementations to reject the request — while not prohibited by the specification, the semantics are undefined. It is better to just avoid sending payloads in GET requests.
+
+|                              |     |
+| ---------------------------- | :-: |
+| Request has body             | No  |
+| Successful response has body | Yes |
+| Safe                         | Yes |
+| Idempotent                   | Yes |
+| Cacheable                    | Yes |
+| Allowed in HTML forms        | Yes |  
+
+**Syntax**  
+```
+GET /index.html
+```
+
+The HTTP HEAD method requests the headers that would be returned if the HEAD request's URL was instead requested with the HTTP GET method. **For example, if a URL might produce a large download, a HEAD request could read its Content-Length header to check the filesize without actually downloading the file.**
+
+> Warning: A response to a HEAD method should not have a body. If it has one anyway, that body must be ignored: any representation headers that might describe the erroneous body are instead assumed to describe the response which a similar GET request would have received.
+
+If the response to a HEAD request shows that a cached URL response is now outdated, the cached copy is invalidated even if no GET request was made.  
+
+|                              |     |
+| ---------------------------- | :-: |
+| Request has body             | No  |
+| Successful response has body | No  |
+| Safe                         | Yes |
+| Idempotent                   | Yes |
+| Cacheable                    | Yes |
+| Allowed in HTML forms        | No  |  
+
+**Syntax**  
+```
+HEAD /index.html
+```
