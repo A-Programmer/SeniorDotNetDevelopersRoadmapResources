@@ -217,3 +217,41 @@ If the response to a HEAD request shows that a cached URL response is now outdat
 ```
 HEAD /index.html
 ```
+### **OPTIONS**
+
+The HTTP OPTIONS method requests permitted communication options for a given URL or server. A client can specify a URL with this method, or an asterisk (*) to refer to the entire server.  
+
+|                              |     |
+| ---------------------------- | :-: |
+| Request has body             | No  |
+| Successful response has body | Yes |
+| Safe                         | Yes |
+| Idempotent                   | Yes |
+| Cacheable                    | No  |
+| Allowed in HTML forms        | No  |  
+
+**Syntax**  
+```
+OPTIONS /index.html HTTP/1.1
+OPTIONS * HTTP/1.1
+```
+**Examples**  
+Identifying allowed request methods
+To find out which request methods a server supports, one can use the curl command-line program to issue an OPTIONS request:
+
+```
+curl -X OPTIONS https://example.org -i
+```
+
+The response then contains an Allow header that holds the allowed methods:
+```
+HTTP/1.1 204 No Content
+Allow: OPTIONS, GET, HEAD, POST
+Cache-Control: max-age=604800
+Date: Thu, 13 Oct 2016 11:45:00 GMT
+Server: EOS (lax004/2813)
+```
+
+**Status Code**  
+Both 200 OK and 204 No Content are permitted status codes, but some browsers incorrectly believe 204 No Content applies to the resource and do not send the subsequent request to fetch it.
+
