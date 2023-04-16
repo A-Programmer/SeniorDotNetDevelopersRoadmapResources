@@ -118,4 +118,35 @@ Responses consist of the following elements:
 ## APIs based on HTTP
 The most commonly used API based on HTTP is the XMLHttpRequest API, which can be used to exchange data between a user agent and a server. The modern Fetch API provides the same features with a more powerful and flexible feature set.
 
-Another API, server-sent events, is a one-way service that allows a server to send events to the client, using HTTP as a transport mechanism. Using the EventSource interface, the client opens a connection and establishes event handlers. The client browser automatically converts the messages that arrive on the HTTP stream into appropriate Event objects. Then it delivers them to the event handlers that have been registered for the events' type if known, or to the onmessage event handler if no type-specific event handler was established.
+Another API, server-sent events, is a one-way service that allows a server to send events to the client, using HTTP as a transport mechanism. Using the EventSource interface, the client opens a connection and establishes event handlers. The client browser automatically converts the messages that arrive on the HTTP stream into appropriate Event objects. Then it delivers them to the event handlers that have been registered for the events' type if known, or to the onmessage event handler if no type-specific event handler was established.  
+
+## HTTP Request Methods
+**CONNECT**  
+The HTTP CONNECT method starts two-way communications with the requested resource. It can be used to open a tunnel.
+
+For example, the CONNECT method can be used to access websites that use SSL (HTTPS). The client asks an HTTP Proxy server to tunnel the TCP connection to the desired destination. The server then proceeds to make the connection on behalf of the client. Once the connection has been established by the server, the Proxy server continues to proxy the TCP stream to and from the client.
+
+CONNECT is a hop-by-hop method.  
+
+|                              |     |
+| ---------------------------- | :-: |
+| Request has body             | No  |
+| Successful response has body | No  |
+| Safe                         | No  |
+| Idempotent                   | No  |
+| Cacheable                    | No  |
+| Allowed in HTML forms        | No  |  
+
+**DELETE**  
+
+The HTTP DELETE request method deletes the specified resource.  
+
+|                              |     |
+| ---------------------------- | :-: |
+| Request has body             | May |
+| Successful response has body | May  |
+| Safe                         | No  |
+| Idempotent                   | Yes  |
+| Cacheable                    | No  |
+| Allowed in HTML forms        | No  |  
+
