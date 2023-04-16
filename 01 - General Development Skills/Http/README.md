@@ -426,4 +426,7 @@ The final recipient of the request should reflect the message received, excludin
 **Syntax**  
 ```
 TRACE /index.html
-```
+```  
+
+## HTTP Response Status Codes
+You can see the list of Http response status codes with details [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/100).
